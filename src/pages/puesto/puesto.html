@@ -1,0 +1,109 @@
+<!--
+  Generated template for the PuestoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Puesto {{puesto.nameid}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+
+    <ion-card-header>
+      <ion-icon name="information-circle" item-start></ion-icon>
+      INFORMACIÓN
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-label>{{puesto.town}}, {{puesto.sector}}</ion-label>
+      <ion-label>{{puesto.street}}</ion-label>
+    </ion-card-content>
+
+  </ion-card>
+
+
+
+  <ion-card>
+
+    <ion-card-header>
+      <ion-icon name="clipboard" item-start></ion-icon>
+      EVENTO ACTUAL
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list no-lines>
+
+        <ion-item>
+          <ion-label>Reserva</ion-label>
+          <ion-toggle (ionChange)="UpdateChanges()" [(ngModel)]="puesto.events[0].reserved" checked="{{puesto.reserved}}"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Fallo</ion-label>
+          <ion-toggle (ionChange)="UpdateChanges()" checked="false"></ion-toggle>
+        </ion-item>
+
+        <ion-list>
+         <ion-item>
+           <ion-label>Estado</ion-label>
+
+           <ion-select (ionChange)="UpdateChanges()" [(ngModel)]="puesto.events[0].state">
+               <ion-option *ngFor="let state of stateArray; let i = index" value="{{i}}">
+                   {{state}}
+               </ion-option>
+           </ion-select>
+
+         </ion-item>
+       </ion-list>
+
+        <ion-item>
+          <ion-label fixed>Comentarios</ion-label>
+          <ion-input type="comentarios"></ion-input>
+        </ion-item>
+
+    </ion-list>
+
+    </ion-card-content>
+
+  </ion-card>
+
+
+
+    <ion-card>
+
+      <ion-card-header>
+        <ion-icon name="calendar" item-start></ion-icon>
+        HISTORIAL
+      </ion-card-header>
+
+      <ion-card-content>
+        <!-- limited view to last 4 events -->
+        <ion-item-sliding *ngFor="let event of puesto.events| slice:0:4; let i=index">
+
+          <ion-item [ngStyle]="{'background-color': colorArray[event.state]}">
+            <ion-icon *ngIf="event.reserved" name="star" item-start></ion-icon>
+            <ion-icon *ngIf="!event.reserved" name="" item-start></ion-icon>
+            <ion-label>{{event.date | date: 'dd MMM, yy'}} </ion-label>
+            <ion-label>{{event.occupant}}</ion-label>
+            <!-- <ion-label>{{event.comment}}</ion-label> -->
+          </ion-item>
+
+        </ion-item-sliding>
+      </ion-card-content>
+
+    </ion-card>
+
+
+
+
+
+
+
+</ion-content>
