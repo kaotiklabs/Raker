@@ -37,10 +37,10 @@ export class TodosProvider {
 
 
     console.log('Creating remote db');
-    this.remotedb = 'https://couchdb-05477d.smileupps.com/raker';
+    this.remotedb = 'https://***.com/raker';
 
     //no pot crearla sino es admin
-    // https://admin:63bd0aad6b63@couchdb-05477d.smileupps.com/sources
+    // https://***.com/sources
 
     let options = {
       live: true,
